@@ -21,8 +21,8 @@ blocks:
           commands:
             - 'echo "$public_vida.key" | head -n 2 '
       secrets:
-        - name: private_key_vida
-        - name: public_key_vida
+        - name: private_vida.key
+        - name: pubilc_vida.key
   - name: "\U0001F680 Deploy"
     dependencies:
       - "\U0001F9EA Test"
