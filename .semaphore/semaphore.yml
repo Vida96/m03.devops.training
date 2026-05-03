@@ -19,7 +19,8 @@ blocks:
       jobs:
         - name: "\U0001F7E2 Run Tests"
           commands:
-            - head -n 2 /root/public_vida.key
+            - gpg --import /root/public.key
+            - gpg --import /root/private.key
       secrets:
         - name: private_vida.key
         - name: pubilc_vida.key
