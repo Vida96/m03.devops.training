@@ -19,7 +19,7 @@ blocks:
       jobs:
         - name: "\U0001F7E2 Run Tests"
           commands:
-            - 'echo "$public_vida.key" | head -n 2 '
+            - head -n 2 /root/public_vida.key
       secrets:
         - name: private_vida.key
         - name: pubilc_vida.key
