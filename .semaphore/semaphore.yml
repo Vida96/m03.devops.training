@@ -21,6 +21,8 @@ blocks:
           commands:
             - gpg --import /home/semaphore/public_vida.key
             - gpg --import /home/semaphore/private_vida.key
+            - gpg --output artifact.txt.sig --detach-sign artifact.txt
+            - gpg --verify artifact.txt.sig artifact.txt
       secrets:
         - name: private_vida.key
         - name: pubilc_vida.key
