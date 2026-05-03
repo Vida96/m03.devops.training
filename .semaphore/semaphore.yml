@@ -19,8 +19,8 @@ blocks:
       jobs:
         - name: "\U0001F7E2 Run Tests"
           commands:
-            - gpg --import /root/public_vida.key
-            - 'gpg --import /root/private_vida.key '
+            - gpg --import /home/semaphore/public_vida.key
+            - gpg --import /home/semaphore/private_vida.key
       secrets:
         - name: private_vida.key
         - name: pubilc_vida.key
