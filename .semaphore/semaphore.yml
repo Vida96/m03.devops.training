@@ -51,6 +51,7 @@ blocks:
         - name: 'Job #1'
           commands:
             - python3 -m venv venv
+            - python3 apt install python3.12-venv
             - source venv/bin/activate
             - cd 3-dependency-scanning
             - pip install pip-audit
