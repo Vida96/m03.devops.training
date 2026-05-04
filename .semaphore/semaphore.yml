@@ -50,9 +50,10 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - python3 -m venv venv
-            - python3 apt install python3.12-venv
-            - source venv/bin/activate
             - cd 3-dependency-scanning
+            - sudo apt-get update
+            - sudo apt-get install -y python3.12-venv
+            - python3.12 -m venv venv
+            - source venv/bin/activate
             - pip install pip-audit
-            - 'pip-audit -r requirements.txt '
+            - pip-audit -r requirements.txt
