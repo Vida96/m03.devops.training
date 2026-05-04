@@ -22,7 +22,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: sign
+        - name: 'sign '
           commands:
             - cd 1-signing/
             - 'gpg --import /home/semaphore/public_vida.key '
