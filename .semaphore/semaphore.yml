@@ -71,3 +71,18 @@ blocks:
             - source venv/bin/activate
             - pip install bandit
             - bandit -r vulnerable_script.py || true
+  - name: 'Block #5'
+    dependencies:
+      - 'Block #4'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - cd 5-dast
+            - sudo apt-get update
+            - sudo apt-get install -y python3.12-venv
+            - python3.12 -m venv venv
+            - source venv/bin/activate
+            - pip install wapiti
+            - 'gunicorn -b 0:0:0:0:4000 app:app --daemon'
+            - 'wapiti -u http://localhost:4000 -f html'
