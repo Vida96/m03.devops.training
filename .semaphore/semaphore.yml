@@ -42,3 +42,4 @@ blocks:
             - cd 2-sbom
             - pip install cyclonedx-bom
             - 'cyclonedx-py requirements -o bom.json '
+            - artifact push job bom.json
