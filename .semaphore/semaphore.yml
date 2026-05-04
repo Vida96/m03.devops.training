@@ -43,3 +43,10 @@ blocks:
             - pip install cyclonedx-bom
             - 'cyclonedx-py requirements -o bom.json '
             - artifact push job bom.json
+  - name: 'Block #3'
+    dependencies:
+      - "\U0001F680 Deploy"
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands: []
