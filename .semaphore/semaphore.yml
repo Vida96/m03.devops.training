@@ -52,4 +52,4 @@ blocks:
           commands:
             - cd 3-dependency-scanning
             - pip install pip-audit
-            - pip-audit -r requirements.txt
+            - 'pip-audit -r requirements.txt '
