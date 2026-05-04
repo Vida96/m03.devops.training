@@ -18,11 +18,11 @@ global_job_config:
       - sem-version python 3.12
       - checkout
 blocks:
-  - name: "\U0001F9EA Test"
+  - name: Code singing
     dependencies: []
     task:
       jobs:
-        - name: "\U0001F7E2 Run Tests"
+        - name: sign
           commands:
             - cd 1-signing/
             - 'gpg --import /home/semaphore/public_vida.key '
@@ -32,23 +32,23 @@ blocks:
       secrets:
         - name: private_vida.key
         - name: pubilc_vida.key
-  - name: "\U0001F680 Deploy"
+  - name: SBOM
     dependencies:
-      - "\U0001F9EA Test"
+      - Code singing
     task:
       jobs:
-        - name: "\U0001F4E6 Deploy to Production"
+        - name: Cycllonedx
           commands:
             - cd 2-sbom
             - pip install cyclonedx-bom
             - 'cyclonedx-py requirements -o bom.json '
             - artifact push job bom.json
-  - name: 'Block #3'
+  - name: Audit dependencies
     dependencies:
-      - "\U0001F680 Deploy"
+      - SBOM
     task:
       jobs:
-        - name: 'Job #1'
+        - name: pip audit
           commands:
             - cd 3-dependency-scanning
             - sudo apt-get update
@@ -57,12 +57,12 @@ blocks:
             - source venv/bin/activate
             - pip install pip-audit
             - pip-audit -r requirements.txt || true
-  - name: 'Block #4'
+  - name: SAST scan
     dependencies:
-      - 'Block #3'
+      - Audit dependencies
     task:
       jobs:
-        - name: 'Job #1'
+        - name: Bandit
           commands:
             - cd 4-sast
             - sudo apt-get update
@@ -71,12 +71,12 @@ blocks:
             - source venv/bin/activate
             - pip install bandit
             - bandit -r vulnerable_script.py || true
-  - name: 'Block #5'
+  - name: DAST Scan
     dependencies:
-      - 'Block #4'
+      - SAST scan
     task:
       jobs:
-        - name: 'Job #1'
+        - name: wapiti
           commands:
             - cd 5-dast
             - sudo apt-get update
@@ -87,3 +87,4 @@ blocks:
             - pip install wapiti3
             - 'gunicorn -b 0:0:0:0:4000 app:app --daemon'
             - 'wapiti -u http://localhost:4000 -f html'
+            - artifact push job /home/semaphore/.wapiti/generated_report
