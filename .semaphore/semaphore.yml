@@ -12,6 +12,10 @@ auto_cancel:
     when: branch != 'main'
   queued:
     when: branch = 'main'
+global_job_config:
+  prologue:
+    commands:
+      - checkout
 blocks:
   - name: "\U0001F9EA Test"
     dependencies: []
@@ -19,7 +23,6 @@ blocks:
       jobs:
         - name: "\U0001F7E2 Run Tests"
           commands:
-            - checkout
             - cd 1-signing/
             - 'gpg --import /home/semaphore/public_vida.key '
             - gpg --import /home/semaphore/private_vida.key
