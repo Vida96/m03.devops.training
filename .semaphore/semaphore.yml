@@ -50,6 +50,8 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
+            - python3 -m venv venv
+            - source venv/bin/activate
             - cd 3-dependency-scanning
             - pip install pip-audit
             - 'pip-audit -r requirements.txt '
