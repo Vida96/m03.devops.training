@@ -39,5 +39,6 @@ blocks:
       jobs:
         - name: "\U0001F4E6 Deploy to Production"
           commands:
+            - cd 2-sbom
             - pip install cyclonedx-bom
             - 'cyclonedx-py requirements -o bom.json '
