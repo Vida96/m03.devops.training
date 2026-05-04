@@ -49,4 +49,7 @@ blocks:
     task:
       jobs:
         - name: 'Job #1'
-          commands: []
+          commands:
+            - cd 3-dependency-scanning
+            - pip install pip-audit
+            - pip-audit -r requirements.txt
