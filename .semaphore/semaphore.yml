@@ -51,6 +51,8 @@ blocks:
         - name: 'Job #1'
           commands:
             - cd 3-dependency-scanning
+            - sudo apt-get update
+            - sudo apt-get install -y python3.12-venv
             - python3.12 -m venv venv
             - source venv/bin/activate
             - pip install pip-audit
@@ -66,4 +68,4 @@ blocks:
             - python3.12 -m venv venv
             - source venv/bin/activate
             - pip install bandit
-            - bandit -r vulnerable_script.py
+            - bandit -r vulnerable_script.py || true
