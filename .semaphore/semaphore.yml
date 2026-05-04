@@ -82,7 +82,7 @@ blocks:
             - sudo apt-get update
             - sudo apt-get install -y python3.12-venv
             - sudo apt apt install gunicorn
-            - python3.12 -m venv venv
+            - 'python3.12 -m venv venv '
             - source venv/bin/activate
             - pip install wapiti3
             - 'gunicorn -b 0:0:0:0:4000 app:app --daemon'
