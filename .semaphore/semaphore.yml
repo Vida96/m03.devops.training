@@ -64,7 +64,7 @@ blocks:
       jobs:
         - name: Bandit
           commands:
-            - cd 4-sast
+            - 'cd 4-sast '
             - sudo apt-get update
             - sudo apt-get install -y python3.12-venv
             - python3.12 -m venv venv
